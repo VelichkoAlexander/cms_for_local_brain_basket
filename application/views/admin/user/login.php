@@ -3,7 +3,11 @@
     <p>Please log in using your credentials</p>
 </div>
 <div class="modal-body">
-    <?=validation_errors(); ?>
+    <?= validation_errors();
+    if ($msg = $this->session->flashdata('error')) {
+        echo $msg;
+        }
+    ?>
     <?= form_open(); ?>
     <div class="form-group">
         <label for="email">Email</label>
