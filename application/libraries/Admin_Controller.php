@@ -6,6 +6,9 @@ class Admin_Controller extends MY_Controller
     {
         parent::__construct();
         $this->data['meta_title']  = 'My Cms';
+        $this->load->helper('form');
+        $this->load->library('form_validation');
+        $this->load->model('user_m');
 
 
     }
