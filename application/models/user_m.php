@@ -9,6 +9,14 @@ class  User_M extends MY_Model
         'password' => array('field' => 'password', 'label' => 'Password', 'rules' => 'trim|required')
 
     );
+    public $rules_admin = array(
+        'name' => array('field' => 'name', 'label' => 'Name', 'rules' => 'trim|required'),
+        'order' => array('field' => 'order', 'label' => 'Order', 'rules' => 'trim|is_natural'),
+        'email' => array('field' => 'email', 'label' => 'Email', 'rules' => 'trim|required|valid_email|callback__unique_email'),
+        'password' => array('field' => 'password', 'label' => 'Password', 'rules' => 'trim|matches[password]'),
+        'password_confirm' => array('field' => 'password_confirm', 'label' => 'Confirm password', 'rules' => 'trim|matches[password]')
+
+    );
 
 
     function __construct()

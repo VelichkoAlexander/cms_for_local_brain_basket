@@ -27,7 +27,7 @@
         <!-- Main Colimn-->
         <div class="col-md-9">
             <section>
-                <h2>Page Name</h2>
+               <? $this->load->view($subview); ?>
             </section>
         </div>
         <!-- Side bar -->
