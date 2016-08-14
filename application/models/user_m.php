@@ -11,9 +11,8 @@ class  User_M extends MY_Model
     );
     public $rules_admin = array(
         'name' => array('field' => 'name', 'label' => 'Name', 'rules' => 'trim|required'),
-        'order' => array('field' => 'order', 'label' => 'Order', 'rules' => 'trim|is_natural'),
         'email' => array('field' => 'email', 'label' => 'Email', 'rules' => 'trim|required|valid_email|callback__unique_email'),
-        'password' => array('field' => 'password', 'label' => 'Password', 'rules' => 'trim|matches[password]'),
+        'password' => array('field' => 'password', 'label' => 'Password', 'rules' => 'trim|matches[password_confirm]'),
         'password_confirm' => array('field' => 'password_confirm', 'label' => 'Confirm password', 'rules' => 'trim|matches[password]')
 
     );
@@ -22,6 +21,15 @@ class  User_M extends MY_Model
     function __construct()
     {
         parent::__construct();
+    }
+
+    public function array_form_post($fields)
+    {
+        $data = array();
+        foreach ($fields as $field){
+            $data[$field] = $this->input->post($field);
+        }
+        return $data;
     }
 
     public function login()
@@ -50,6 +58,17 @@ class  User_M extends MY_Model
     public function loggedin()
     {
         return (bool)$this->session->userdata('loggedin');
+    }
+
+    public function get_new()
+    {
+        $user = new stdClass();
+        $user->name = '';
+        $user->email = '';
+        $user->password = '';
+
+        return $user;
+
     }
 
     public function hash($string)

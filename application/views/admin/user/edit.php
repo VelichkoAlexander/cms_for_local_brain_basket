@@ -15,8 +15,8 @@
             'name' => 'name',
             'id' => 'name',
             'type' => 'text',
-            'required' => 'true',
-            'class' => 'form-control'
+            'class' => 'form-control',
+            'value' => set_value('name', $user->name)
         )); ?>
     </div>
     <div class="form-group">
@@ -25,8 +25,8 @@
             'name' => 'email',
             'id' => 'email',
             'type' => 'email',
-            'required' => 'true',
-            'class' => 'form-control'
+            'class' => 'form-control',
+            'value' => set_value('email', $user->email)
         )); ?>
     </div>
     <div class="form-group">
@@ -34,7 +34,6 @@
         <?= form_password(array(
             'name' => 'password',
             'id' => 'password',
-            'required' => 'true',
             'class' => 'form-control'
         )); ?>
     </div>
@@ -43,7 +42,6 @@
         <?= form_password(array(
             'name' => 'password_confirm',
             'id' => 'password_confirm',
-            'required' => 'true',
             'class' => 'form-control'
         )); ?>
     </div>
