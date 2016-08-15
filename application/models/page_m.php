@@ -7,7 +7,6 @@ class Page_m extends MY_Model
         'parent_id' => array(
             'field' => 'parent_id',
             'label' => 'Parent',
-            'label' => 'Parent',
             'rules' => 'trim|intval'
         ),
         'title' => array(
@@ -37,16 +36,16 @@ class Page_m extends MY_Model
         return $page;
     }
 
-//    public function delete ($id)
-//    {
-//        // Delete a page
-//        parent::delete($id);
-//
-//        // Reset parent ID for its children
-//        $this->db->set(array(
-//            'parent_id' => 0
-//        ))->where('parent_id', $id)->update($this->_table_name);
-//    }
+    public function delete ($id = false)
+    {
+        // Delete a page
+        parent::delete($id);
+
+        // Reset parent ID for its children
+        $this->db->set(array(
+            'parent_id' => 0
+        ))->where('parent_id', $id)->update($this->_table_name);
+    }
 
     public function save_order ($pages)
     {

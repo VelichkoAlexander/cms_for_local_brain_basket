@@ -8,6 +8,10 @@ if ($msg = $this->session->flashdata('error')) {
 ?>
 <?= form_open(); ?>
 <div class="form-group">
+    <label >Parent</label>
+    <?= form_dropdown('parent_id', $pages_no_parents, $this->input->post('parent_id') ? $this->input->post('parent_id') : $page->parent_id); ?>
+</div>
+<div class="form-group">
     <label for="title">Title</label>
     <?= form_input(array(
         'name' => 'title',
