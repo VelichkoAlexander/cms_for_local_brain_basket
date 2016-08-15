@@ -17,7 +17,7 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li class="active"><a href="<?php echo site_url('admin/dashboard'); ?>">Dashboard</a></li>
-                <li><?= anchor('admin/pages', 'Pages'); ?></li>
+                <li><?= anchor('admin/page', 'Pages'); ?></li>
                 <li><?= anchor('admin/user', 'Users'); ?></li>
             </ul>
         </div><!-- /.navbar-collapse -->

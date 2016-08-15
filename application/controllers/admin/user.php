@@ -9,7 +9,11 @@ class User extends Admin_Controller
 
     public function index()
     {
+
+        // Fetch all users
         $this->data['users'] = $this->user_m->get();
+
+        // Load view
         $this->data['subview'] = 'admin/user/index';
         $this->load->view('admin/_layout_main', $this->data);
 
@@ -17,22 +21,28 @@ class User extends Admin_Controller
 
     public function edit($id = NULL)
     {
-
+        // Fetch a user or set a new one
         if ($id) {
             $this->data['user'] = $this->user_m->get($id);
             count($this->data['user']) || $this->data['errors'] = 'User cold not be found';
         } else {
             $this->data['user'] = $this->user_m->get_new();
         }
+
+        // Set up the form
         $rules = $this->user_m->rules_admin;
         $id || $rules['password']['rules'] .= '|required';
         $this->form_validation->set_rules($rules);
+
+        // Process the form
         if ($this->form_validation->run() == TRUE) {
             $data = $this->user_m->array_form_post(array('name', 'email', 'password'));
             $data['password'] = $this->user_m->hash($data['password']);
             $this->user_m->save($data, $id);
             redirect('admin/user');
         }
+
+        // Load view
         $this->data['subview'] = 'admin/user/edit';
         $this->load->view('admin/_layout_main', $this->data);
 
@@ -48,11 +58,15 @@ class User extends Admin_Controller
     public function login()
     {
 
+        // Redirect a user if he's already login
         $dashboard = 'admin/dashboard';
         $this->user_m->loggedin() == FALSE || redirect($dashboard);
 
+        // Set form
         $rules = $this->user_m->rules;
         $this->form_validation->set_rules($rules);
+
+        // Process the form
         if ($this->form_validation->run() == TRUE) {
             // We can login and redirect
             if ($this->user_m->login() == TRUE) {
@@ -62,6 +76,8 @@ class User extends Admin_Controller
                 redirect('admin/user/login', 'refresh');
             }
         }
+
+        // Load view
         $this->data['subview'] = 'admin/user/login';
         $this->load->view('admin/_layout_modal', $this->data);
     }
@@ -74,6 +90,8 @@ class User extends Admin_Controller
 
     public function _unique_email($str)
     {
+
+        // Do Not validate if email already exist
         $id = $this->uri->segment(4);
         $this->db->where('email', $this->input->post('email'));
         !$id || $this->db->where('id !=', $id);
